@@ -3,7 +3,7 @@
 
 
 #interface de conversion de dessins vers STL
-#dependances python-tk, openscad, python3, potrace, pstoedit, imagemagick
+#dependances python-tk, openscad, python2, potrace, pstoedit, imagemagick
 # Licence GNU-GPL
 # Julien RAT pour les Petits Debrouillards et les amis
 
