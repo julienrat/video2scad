@@ -27,7 +27,7 @@ class vid():
         self.gray_im = cv2.cvtColor(self.f, cv2.COLOR_RGB2GRAY)
         self.im_bw = cv2.threshold(self.gray_im, int(scrollbar.get()), 255, cv2.THRESH_BINARY)[1]
         self.a = Image.fromarray(self.im_bw)
-        self.c = self.a.resize((320,240),Image.ANTIALIAS) 
+        self.c = self.a.resize((160,120),Image.ANTIALIAS) 
         self.b = ImageTk.PhotoImage(image=self.c)
        
         self.canvas.create_image(0,0,image=self.b,anchor=tk.NW)
@@ -45,7 +45,7 @@ class photo():
 		im = cv2.cvtColor(im, cv2.COLOR_RGB2GRAY)
 		im_bw = cv2.threshold(im, int(scrollbar.get()), 255, cv2.THRESH_BINARY)[1]
 		im_resized = Image.fromarray(im_bw)
-		im_resized = im_resized.resize((320,240),Image.ANTIALIAS) 
+		im_resized = im_resized.resize((160,120),Image.ANTIALIAS) 
 		cv2.imwrite("pic.png", im_bw)
 		subprocess.call("convert pic.png dessin.bmp", shell=True)
 		subprocess.call("potrace dessin.bmp -o dessin.eps", shell=True)
@@ -98,11 +98,11 @@ if __name__ == '__main__':
 	else:
 		cam=cv2.VideoCapture(0)
 	videoframe = tk.LabelFrame(root,text='Video')
-	videoframe.grid(column=1,row=1,columnspan=1,rowspan=1,padx=5, pady=5, ipadx=5, ipady=5)
-	canvas = tk.Canvas(videoframe, width=320,height=240)
-	canvas.grid(column=0,row=0,columnspan=4, rowspan=1, padx=5, pady=15)
-	canvas2 = tk.Canvas(videoframe, width=320,height=240)
-	canvas2.grid(column=0,row=1,columnspan=4, rowspan=1, padx=5, pady=15)
+	videoframe.grid(column=1,row=1,columnspan=1,rowspan=1,padx=2, pady=2, ipadx=2, ipady=2)
+	canvas = tk.Canvas(videoframe, width=160,height=120)
+	canvas.grid(column=0,row=0,columnspan=4, rowspan=1, padx=2, pady=7)
+	canvas2 = tk.Canvas(videoframe, width=160,height=120)
+	canvas2.grid(column=0,row=1,columnspan=4, rowspan=1, padx=2, pady=7)
 	x = vid(cam,root,canvas)
 	root.after(0,x.update_video)
 	button = tk.Button(text='Quit',master=videoframe,command=root.destroy)
@@ -114,7 +114,7 @@ if __name__ == '__main__':
 	for text, mode in MODES:
 		swicht = tk.Radiobutton(master=videoframe, text=text, variable=v, value=mode)
 		swicht.grid(column=mode,row=4)
-	scrollbar = tk.Scale(videoframe, from_=0, to=255,length=100)
+	scrollbar = tk.Scale(videoframe, from_=0, to=255,length=50)
 	scrollbar.set(127)
 	scrollbar.grid(column=4,row=0)
 	L1 =tk.Label(videoframe, text="Extrude in mm")
