@@ -1,0 +1,1 @@
+rotate_extrude(convexity = 10) import (file = "dessin.dxf");
